@@ -1,6 +1,7 @@
 # temp files
 .DS_Store
 .tmp
+.tmp-jade
 .sass-cache
 
 # npm & bower

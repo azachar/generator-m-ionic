@@ -9,6 +9,8 @@ var $ = require('gulp-load-plugins')();
 var del = require('del');
 var vinylPaths = require('vinyl-paths');
 
+var jade = require( 'gulp-jade' );
+
 var buildDependencies = [
   options['force-build'] ? 'linting' : 'linting-throw',
   'build-app',
@@ -22,7 +24,7 @@ gulp.task('build', buildDependencies, function () {
 });
 
 gulp.task('clean', function () {
-  return gulp.src(['.tmp', paths.dist + '/*'])
+  return gulp.src(['.tmp', '.tmp-jade', paths.dist + '/*'])
     .pipe(vinylPaths(del));
 });
 
@@ -54,9 +56,26 @@ gulp.task('build-app', ['clean', 'inject-all'], function () {
   return stream;
 });
 
+//compilate jade
+gulp.task('jade', function (done) {
+     console.log(paths.jade);
+     
+     gulp.src(paths.jade)
+      .pipe(jade())
+      .pipe(gulp.dest('.tmp-jade'))
+      .on('end', done);
+});
+
 // copy templates
-gulp.task('build-templates', ['clean'], function () {
+gulp.task('html', ['clean'], function () {
   return gulp.src(paths.templates)
+  .pipe($.if(options.minify, $.minifyHtml()))
+  .pipe(gulp.dest(paths.dist));
+});
+
+// copy templates
+gulp.task('build-templates', ['clean', 'html', 'jade'], function () {
+  return gulp.src('.tmp-jade/**/*.html')
   .pipe($.if(options.minify, $.minifyHtml()))
   .pipe(gulp.dest(paths.dist));
 });

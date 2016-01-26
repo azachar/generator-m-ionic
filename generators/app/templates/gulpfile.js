@@ -8,9 +8,10 @@ var fs = require('fs');
 // config
 gulp.paths = {
   dist: 'www',
-  jsFiles: ['app/**/*.js', '!app/bower_components/**/*.js'],
+  jsFiles: ['app/**/*.js', '!app/bower_components/**/*.js', '!app/**/*.spec.js'],
   jsonFiles: ['app/**/*.json', '!app/bower_components/**/*.json'],
-  templates: ['app/*/templates/**/*'],
+  templates: ['app/*/templates/**/*','!app/**/*.jade'],
+  jade: ['app/*/templates/**/*.jade', '!app/bower_components/**/*'],
   karma: ['test/karma/**/*.js'],
   protractor: ['test/protractor/**/*.js']
 };
