@@ -33,7 +33,7 @@ module.exports = yeoman.Base.extend({
       this.template('_debug.html', folder + this.fileName + '.html');
     }
     else if (this.options.template === 'list-detail') {
-      this.template('list-detail.html', folder + this.fileName + '.html');
+      this.template('list-detail.jade', folder + this.fileName + '.jade');
     }
     else if (this.options.template === 'list') {
       this.template('_list.html', folder + this.fileName + '.html');
