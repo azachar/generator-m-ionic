@@ -22,7 +22,7 @@ var bsInit = function (paths, openOverride) {
 };
 
 // WATCH
-gulp.task('watch', ['inject-all'], function () {
+gulp.task('watch', ['jade','inject-all'], function () {
 
   // browser sync server
   bsInit(['app', '.tmp', '.tmp-jade']);
@@ -31,11 +31,10 @@ gulp.task('watch', ['inject-all'], function () {
     .concat([
       'app/index.html',
       '.tmp/*/styles/*.css', // each module's css
-      '.tmp-jade/**/*.html', 
+      '.tmp-jade/**/*.html', // each module's compiled jade into html
       'app/*/assets/**/*'
     ])
-    .concat(paths.templates)
-    .concat(paths.jade);
+    .concat(paths.templates);
 
   // start linting and watching
   gulp.start('linting');
@@ -75,7 +74,7 @@ gulp.task('watch-build', watchBuildDeps, function () {
 });
 
 // SERVE TASKS
-gulp.task('serve', ['inject-all'], function () {
+gulp.task('serve', ['jade','inject-all'], function () {
   bsInit(['app', '.tmp', '.tmp-jade'], false);
 });
 gulp.task('serve-build', ['build'], function () {
