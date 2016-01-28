@@ -56,8 +56,8 @@ gulp.task('build-app', ['clean', 'inject-all'], function () {
   return stream;
 });
 
-//compilate jade
-gulp.task('jade', function (done) {
+//compile jade
+gulp.task('jade',['clean'], function (done) {
      console.log(paths.jade);
      
      gulp.src(paths.jade)
