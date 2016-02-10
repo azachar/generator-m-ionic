@@ -32,7 +32,11 @@ module.exports = function (config) {
       // test
       'test/karma/**/*.js',
       // templates
+      <% if (answers.jade) { -%>
+      '.tmp/**/templates/*.html',
+      <% } else { -%>
       'app/**/templates/*.html'
+      <% } -%>
     ]),
 
     // list of files to exclude
@@ -41,7 +45,11 @@ module.exports = function (config) {
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
-      'app/**/templates/*.html': ['ng-html2js']
+      <% if (answers.jade) { -%>
+      '.tmp/**/templates/*.html': ['ng-html2js']
+      <% } else { -%>
+      'app/**/templates/*.html':['ng-html2js']
+      <% } -%>
     },
 
     // use template cache to avoid unexpected $http requests from ui-router
