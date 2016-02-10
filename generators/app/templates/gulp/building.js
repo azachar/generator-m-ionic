@@ -28,6 +28,11 @@ gulp.task('clean', function () {
     .pipe(vinylPaths(del));
 });
 
+gulp.task('clean-styles', function () {
+  return gulp.src(['.tmp/**/*.css'])
+    .pipe(vinylPaths(del));
+});
+
 // concatenate files in build:blocks inside index.html
 // and copy to build folder destinations
 gulp.task('build-app', ['clean', 'inject-all'], function () {
@@ -59,7 +64,7 @@ gulp.task('build-app', ['clean', 'inject-all'], function () {
 //compile jade
 gulp.task('jade',['clean'], function (done) {
      console.log(paths.jade);
-     
+
      gulp.src(paths.jade)
       .pipe(jade())
       .pipe(gulp.dest('.tmp-jade'))
